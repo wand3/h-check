@@ -7,7 +7,7 @@
     }
   ],
   "functions": {
-    "api/**": {
+    "/": {
 
       "excludeFiles": "{frontend}/**"
     }
