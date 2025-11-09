@@ -26,9 +26,6 @@ export type UserContextType = {
   logout: () => void;
   setUser: (user: UserSchema | null | undefined) => void;
   fetchUser: () => void;
-  fetchAddress: () => void;
-  address: AddressSchema | null | undefined;
-  setAddress: ( address: AddressSchema | null | undefined ) => void;
 }
 
 const UserContext = createContext<UserContextType | null>(null);

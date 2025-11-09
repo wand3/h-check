@@ -1,5 +1,5 @@
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell } from 'recharts';
-import { useMemo, type JSXElementConstructor, type ReactElement, type ReactNode, type ReactPortal } from 'react';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
+import { useMemo } from 'react';
 import type { FhirQueryResponse } from '../schemas/fhirResponse';
 
 export function FhirQueryVisualizer({ data }: { data: FhirQueryResponse }) {
@@ -55,21 +55,21 @@ export function FhirQueryVisualizer({ data }: { data: FhirQueryResponse }) {
   /**
   * Custom Legend component for shadcn spacing and typography.
   */
-  const CustomLegend = (props: { payload: any; }) => {
-      const { payload } = props;
-      return (
-          <ul className="flex justify-center space-x-41mt-4 text-sm text-gray-600 dark:text-gray-400">
-              {payload.map((entry: { color: any; value: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }, index: any) => (
-                  <li key={`item-${index}`} className="flex items-center space-x-3">
-                      <span
-                          className="w-2 h-2 rounded-full"
-                          style={{ backgroundColor: entry.color }}
-                      ></span>
-                  </li>
-              ))}
-          </ul>
-      );
-  };
+  // const CustomLegend = (props: { payload: any; }) => {
+  //     const { payload } = props;
+  //     return (
+  //         <ul className="flex justify-center space-x-41mt-4 text-sm text-gray-600 dark:text-gray-400">
+  //             {payload.map((entry: { color: any; value: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }, index: any) => (
+  //                 <li key={`item-${index}`} className="flex items-center space-x-3">
+  //                     <span
+  //                         className="w-2 h-2 rounded-full"
+  //                         style={{ backgroundColor: entry.color }}
+  //                     ></span>
+  //                 </li>
+  //             ))}
+  //         </ul>
+  //     );
+  // };
 
   return (
     <div className="p-2 sm:p-3 my-1 h-max">
@@ -180,7 +180,7 @@ export function FhirQueryVisualizer({ data }: { data: FhirQueryResponse }) {
                 radius={[4, 4, 0, 0]} // Rounded top corners
               >
                 {/* Dynamically assign color to each bar for visual interest */}
-                {ageBuckets.map((entry, index) => (
+                {ageBuckets.map((_entry, index) => (
                     <Bar key={`bar-${index}`} dataKey="count" fill={COLORS[index]} name="Patients" />
                 ))}
               </Bar>

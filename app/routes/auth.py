@@ -61,7 +61,7 @@ async def register_user(
         db: Annotated[AsyncSession, Depends(get_session)],
         user_model: Annotated[UserModel, Depends(get_user_model)],
 ) -> UserBase:
-    if not user_data.email or not user_data.password or not user_data.username:
+    if not user_data.email or not user_data.username:
         raise HTTPException(status_code=400, detail="Missing required fields")
 
     existing_user = await get_user_by_email(db, user_data.email)
@@ -140,7 +140,6 @@ async def check_email(
 @auth.post("/auth/logout", status_code=status.HTTP_200_OK)
 async def logout_user(
     current_user: UserBase = Depends(get_current_active_user),
-    db: AsyncSession = Depends(get_session),
 ):
     """
     Logout user.

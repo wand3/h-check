@@ -1,5 +1,5 @@
 import HBody from "../components/Body";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import useFlash from "../hooks/UseFlash";
 import Config from "../config";
@@ -14,10 +14,9 @@ import { schema , type RegisterUserInputSchema } from '../schemas/auth'
 import axios from "axios";
 
 
-
 const RegisterPage = () => {
 
-  const { loading, error, success } = useSelector((state: RootState) => state.auth); // Type-safe selector
+  const { loading, success } = useSelector((state: RootState) => state.auth); // Type-safe selector
   const dispatch = useDispatch<AppDispatch>(); // Type-safe dispatch 
 
   // const { register, handleSubmit, formState: { errors }, setError, clearErrors } = useForm<RegisterUserInputSchema>({
@@ -55,29 +54,29 @@ const RegisterPage = () => {
 
 
   const onSubmit = async (data: RegisterUserInputSchema) => {
-      try {
-        console.log('onsubmit in')
-        clearErrors(); // Clear any previous errors
-        console.log('onsubmit clear errors')
-        // check if username exist 
-        const existingUserResponse = await axios.get(`${Config.baseURL}/auth/check-username?username=${data.username}`);
-        // console.log(existingUserResponse)
-        if (existingUserResponse.data.exists) {
-          setError("username", { type: "manual", message: "Username already exists" });
-          return;
-        }
-        // check if email exist 
-        const existingUserEmailResponse = await axios.get(`${Config.baseURL}/auth/check-email?email=${data.email}`);
-        // console.log(existingUserEmailResponse)
-        if (existingUserEmailResponse.data.exists) {
-          setError("email", { type: "manual", message: "Email already exists" });
-          return;
-        }
+    try {
+      console.log('onsubmit in')
+      clearErrors(); // Clear any previous errors
+      console.log('onsubmit clear errors')
+      // check if username exist 
+      const existingUserResponse = await axios.get(`${Config.baseURL}/auth/check-username?username=${data.username}`);
+      // console.log(existingUserResponse)
+      if (existingUserResponse.data.exists) {
+        setError("username", { type: "manual", message: "Username already exists" });
+        return;
+      }
+      // check if email exist 
+      const existingUserEmailResponse = await axios.get(`${Config.baseURL}/auth/check-email?email=${data.email}`);
+      // console.log(existingUserEmailResponse)
+      if (existingUserEmailResponse.data.exists) {
+        setError("email", { type: "manual", message: "Email already exists" });
+        return;
+      }
 
-        dispatch(registerUser({
-          username: data.username, email: data.email, password: data.password,
-          confirm: ""
-        }));
+      dispatch(registerUser({
+        username: data.username, email: data.email, password: data.password,
+        confirm: ""
+      }));
       } catch (err: any) {
         console.error("Registration error:", err);
         flash('Failed', 'error')
@@ -88,8 +87,8 @@ const RegisterPage = () => {
           setError("root", { type: "manual", message: "An unexpected error occurred during registration." });
         }
       }
-    };
- 
+    
+  };
 
   return (
     <>

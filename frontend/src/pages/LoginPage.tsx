@@ -1,8 +1,8 @@
 import HBody from "../components/Body";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import useFlash from "../hooks/UseFlash";
-import Config from "../config";
+// import Config from "../config";
 import { useDispatch, useSelector } from 'react-redux'
 import type { AppDispatch, RootState } from "../store";
 import { loginUser } from "../services/auth";
@@ -49,10 +49,12 @@ const LoginPage = () => {
         console.log('onsubmit clear errors')
         // check if username exist 
         
-
-        const j = dispatch(loginUser({
+        dispatch(loginUser({
           username: data.username, password: data.password,
         }));
+        // const j = dispatch(loginUser({
+        //   username: data.username, password: data.password,
+        // }));
         // console.log('post dispatch clear errors')
         // console.log(j)
 
@@ -77,7 +79,6 @@ const LoginPage = () => {
 
                 <a className="block text-[#ba2a25] p-2" href="/">
                   <span className="sr-only">Home</span>
-                  {/* <StoreIcon className="h-[4rem] w-fit"/> */}
 
                 </a>
 

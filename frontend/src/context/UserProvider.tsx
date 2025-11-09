@@ -26,9 +26,6 @@ export type UserContextType = {
   logout: () => void;
   setUser: (user: UserSchema | null | undefined) => void;
   fetchUser: () => void;
-  fetchAddress: () => void;
-  address: AddressSchema | null | undefined;
-  setAddress: ( address: AddressSchema | null | undefined ) => void;
 }
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -77,16 +74,15 @@ export const UserProvider = ({children}: React.PropsWithChildren<{}>) => {
 
   // Fetch products function
   const fetchUser = async () => {
-      try {
-
-          const response = await api.get<UserSchema>('/user/me');
-          console.log(response)
-          const data = response.body;
-          console.log(data)
-          setUser(data)
-      } catch (error) {
-          setUser(null); // Handle error state
-      }
+    try {
+        const response = await api.get<UserSchema>('/user/me');
+        console.log(response)
+        const data = response.body;
+        console.log(data)
+        setUser(data)
+    } catch (error) {
+        setUser(null); // Handle error state
+    }
   };
 
 

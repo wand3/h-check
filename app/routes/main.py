@@ -27,6 +27,12 @@ async def process_query(
     start_time = datetime.now()
 
     try:
+        if not query_data['query']:
+            raise HTTPException(status_code=422, detail=str('Provide a valid query'))
+    except Exception as e:
+        raise HTTPException(status_code=422, detail=str(f'Valid {e} not provided'))
+
+    try:
         # Initialize processor with database session
         processor = FHIRQueryProcessor(db)
 
@@ -41,13 +47,13 @@ async def process_query(
 
         execution_time = int((datetime.now() - start_time).total_seconds() * 1000)
 
-        # # Log the query
-        logger.info(f'natural_language_query={query_data["query"]}, '
-                    f"fhir_query={fhir_query['fhir_url']}, "
-                    f"fhir_response={fhir_response}, "
-                    f"processed_results={processed_results}, "
-                    f"execution_time={execution_time}"
-                    )
+        # # # Log the query
+        # logger.info(f'natural_language_query={query_data["query"]}, '
+        #             f"fhir_query={fhir_query['fhir_url']}, "
+        #             f"fhir_response={fhir_response}, "
+        #             f"processed_results={processed_results}, "
+        #             f"execution_time={execution_time}"
+        #             )
 
         return {
             "original_query": query_data['query'],

@@ -1,5 +1,5 @@
 // import NavMain from "./NavMain";
-import React, { FC } from "react";
+import React, { type FC } from "react";
 import FlashMessage from "./FlashMessage";
 
 
@@ -8,7 +8,7 @@ type BodyProps = {
   children?: React.ReactNode;
 };
 
-const HBody: FC<BodyProps> = ({ nav, children }) => {
+const HBody: FC<BodyProps> = ({ children }) => {
   return (
     <>
     {/* dark:bg-[#F4F2F0] */}

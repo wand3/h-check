@@ -1,6 +1,6 @@
-import { createAsyncThunk, isRejectedWithValue } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, {AxiosError} from 'axios';
-import type { RegisterUserInputSchema, RegisterUserOutputSchema, LoginUserInputSchema, LoginUserOutputSchema } from '../schemas/auth';
+import type { RegisterUserInputSchema, RegisterUserOutputSchema, LoginUserOutputSchema } from '../schemas/auth';
 import Config from '../config';
 
 

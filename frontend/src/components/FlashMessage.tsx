@@ -1,4 +1,4 @@
-import FlashContextType from "../context/FlashProvider";
+import type {FlashContextType} from "../context/FlashProvider";
 import FlashContext from "../context/FlashProvider";
 import { useContext } from "react";
 

@@ -12,23 +12,17 @@ import {
   PromptInputTextarea,
   PromptInputToolbar,
 } from '@/components/ui/shadcn-io/ai/prompt-input';
-import {
-  Reasoning,
-  ReasoningContent,
-  ReasoningTrigger,
-} from '@/components/ui/shadcn-io/ai/reasoning';
 import { Source, Sources, SourcesContent, SourcesTrigger } from '@/components/ui/shadcn-io/ai/source';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+// import { cn } from '@/lib/utils';
 import { MenuIcon, RotateCcwIcon, User as UserIcon } from 'lucide-react'; // Renamed User to UserIcon
 import { nanoid } from 'nanoid';
-import { type FormEventHandler, useCallback, useEffect, useRef, useState } from 'react';
+import { type FormEventHandler, useCallback, useRef, useState } from 'react';
 
 // user provider 
 import React from "react";
-import UseApi from "../hooks/UseApi";
 import useFlash from "../hooks/UseFlash";
-import type { UserSchema } from "../context/UserProvider";
+// import type { UserSchema } from "../context/UserProvider";
 import { useNavigate, useParams } from "react-router-dom";
 // import useUser from "../hooks/UseUser";
 
@@ -37,10 +31,10 @@ import Config from '@/config';
 import { FhirQueryVisualizer } from './Charts';
 import { useGetUserDetailsQuery } from '@/services/user';
 import { useDispatch, useSelector } from 'react-redux';
-import SpinnerLineWave from './Spinner';
+// import SpinnerLineWave from './Spinner';
 import type { AppDispatch, RootState } from '@/store';
 import LoadingSpan from './LoadingSpan';
-import { logoutUser } from '../services/auth'
+// import { logoutUser } from '../services/auth'
 import { logout } from '../slices/AuthSlice'
 
 
@@ -104,7 +98,7 @@ const FhirBot = () => {
       ]
     }
   ]);
-  const {id} = useParams();
+  useParams();
 
 
   // query input and suggestions 
@@ -128,7 +122,7 @@ const FhirBot = () => {
  
 
   // Fix the query hook
-  const { data: user, isLoading: isUserLoading, error: userError } = useGetUserDetailsQuery(undefined, {
+  const { data: user } = useGetUserDetailsQuery(undefined, {
     pollingInterval: 9000,
     skip: !token,
   });
@@ -146,38 +140,38 @@ const FhirBot = () => {
 
  
   const [isTyping, setIsTyping] = useState(false);
-  const [streamingMessageId, setStreamingMessageId] = useState<string | null>(null);
+  const [, setStreamingMessageId] = useState<string | null>(null);
   
   // result setting 
   const [loading, setLoading] = useState(false);
   // const [error, setError] = useState<string | null>(null);
 
-  const simulateTyping = useCallback((messageId: string, content: string, reasoning?: string, sources?: Array<{ title: string; url: string }>) => {
-    let currentIndex = 0;
-    const typeInterval = setInterval(() => {
-      setMessages(prev => prev.map(msg => {
-        if (msg.id === messageId) {
-          const currentContent = content.slice(0, currentIndex);
-          return {
-            ...msg,
-            content: currentContent,
-            isStreaming: currentIndex < content.length,
-            reasoning: currentIndex >= content.length ? reasoning : undefined,
-            sources: currentIndex >= content.length ? sources : undefined,
-          };
-        }
-        return msg;
-      }));
-      currentIndex += Math.random() > 0.1 ? 1 : 0; // Simulate variable typing speed
+  // const simulateTyping = useCallback((messageId: string, content: string, reasoning?: string, sources?: Array<{ title: string; url: string }>) => {
+  //   let currentIndex = 0;
+  //   const typeInterval = setInterval(() => {
+  //     setMessages(prev => prev.map(msg => {
+  //       if (msg.id === messageId) {
+  //         const currentContent = content.slice(0, currentIndex);
+  //         return {
+  //           ...msg,
+  //           content: currentContent,
+  //           isStreaming: currentIndex < content.length,
+  //           reasoning: currentIndex >= content.length ? reasoning : undefined,
+  //           sources: currentIndex >= content.length ? sources : undefined,
+  //         };
+  //       }
+  //       return msg;
+  //     }));
+  //     currentIndex += Math.random() > 0.1 ? 1 : 0; // Simulate variable typing speed
       
-      if (currentIndex >= content.length) {
-        clearInterval(typeInterval);
-        setIsTyping(false);
-        setStreamingMessageId(null);
-      }
-    }, 50);
-    return () => clearInterval(typeInterval);
-  }, []);
+  //     if (currentIndex >= content.length) {
+  //       clearInterval(typeInterval);
+  //       setIsTyping(false);
+  //       setStreamingMessageId(null);
+  //     }
+  //   }, 50);
+  //   return () => clearInterval(typeInterval);
+  // }, []);
 
   // -----------------------------
   // Execute query (POST) and set results

@@ -9,7 +9,7 @@ async def main():
             user='postgres',
             password='ma3str0',
             host='localhost',
-            database='hcheck'
+            database='hchecktest'
         )
         await conn.close()
         print("✅ Database 'hcheck' exists")
@@ -22,10 +22,10 @@ async def main():
             user='postgres',
             password='ma3str0',
             host='localhost',
-            database='postgres'
+            database='hcheck'
         )
 
-        await admin_conn.execute('CREATE DATABASE hcheck')
+        await admin_conn.execute('CREATE DATABASE hchecktest')
         await admin_conn.close()
         print("✅ Database 'hcheck' created successfully")
 

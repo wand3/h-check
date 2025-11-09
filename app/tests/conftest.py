@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from app.main import app  # your FastAPI app which includes routes/auth
 from app.database.db_engine import get_session  # we will override this
 
-TEST_DATABASE_URL = "postgresql+asyncpg://postgres:ma3str0@localhost:5432/hcheck"
+TEST_DATABASE_URL = "postgresql+asyncpg://postgres:ma3str0@localhost:5432/hchecktest"
 
 test_engine = create_async_engine(TEST_DATABASE_URL, future=True, echo=False)
 TestSessionLocal = async_sessionmaker(test_engine, class_=AsyncSession, expire_on_commit=False)
@@ -26,11 +26,12 @@ async def setup_test_db():
     await test_engine.dispose()
 
 @pytest.fixture
-async def async_client(monkeypatch):
+async def async_client():
     # patch the dependency
-    app.dependency_overrides[get_session] = override_get_session
-
-    async with AsyncClient(app, base_url="http://") as client:
+    # app.dependency_overrides[get_session] = override_get_session
+    async with AsyncClient(app=app) as client:
         yield client
+    # async with AsyncClient(app) as client:
+    #     yield client
 
-    app.dependency_overrides.pop(get_session, None)
+    # app.dependency_overrides.pop(get_session, None)

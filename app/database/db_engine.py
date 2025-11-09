@@ -1,3 +1,4 @@
+import os
 from typing import AsyncGenerator
 from ..config import Config
 from fastapi import FastAPI
@@ -11,9 +12,23 @@ from sqlmodel import SQLModel
 
 
 # connect_args = {"check_same_thread": False}
-engine = create_async_engine(Config.DATABASE_URL,
+engine = any
+# load db depending on prod env and test env
+if os.getenv("TESTING", "false").lower() == "true":
+    DATABASE_URL: str = os.getenv("TEST_DATABASE_URL",
+                                  "postgresql+asyncpg://postgres:ma3str0@localhost:5432/hchecktest")
+    SYNC_DATABASE_URL: str = os.getenv("TEST_SYNC_DATABASE_URL",
+                                       "postgresql://postgres:ma3str0@localhost:5432/hchecktest")
+    engine = create_async_engine(DATABASE_URL,
                              echo=True)
+else:
+    DATABASE_URL: str = os.getenv("DATABASE_URL",
+                                  "postgresql+asyncpg://postgres:ma3str0@localhost:5432/hcheck")
+    SYNC_DATABASE_URL: str = os.getenv("SYNC_DATABASE_URL",
+                                       "postgresql://postgres:ma3str0@localhost:5432/hcheck")
 
+    engine = create_async_engine(DATABASE_URL,
+                                 echo=True)
 # Create a new async "sessionmaker"
 # This is a configurable factory for creating new AsyncSession objects
 AsyncSessionLocal = sessionmaker(
@@ -25,7 +40,7 @@ async def create_db_and_tables():
     Initializes the database tables. Should be called once on application startup.
     """
     async with engine.begin() as conn:
-        # await conn.run_sync(SQLModel.metadata.drop_all) # Optional: drop tables first
+        await conn.run_sync(SQLModel.metadata.drop_all) # Optional: drop tables first
         await conn.run_sync(SQLModel.metadata.create_all)
 
 async def get_session() -> AsyncSession:

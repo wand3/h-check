@@ -1,7 +1,7 @@
 // --- NEW INLINE LOADING SPAN COMPONENT ---
 const LoadingSpan = () => (
     <>
-    <style jsx="true">{`
+    <style >{`
         @keyframes blink {
             0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }

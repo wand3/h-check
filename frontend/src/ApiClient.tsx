@@ -14,7 +14,7 @@ type Options<TREQ> = {
 }
   
 type Response<TRES> = {
-  data: any;
+  data?: any | null;
   ok: boolean;
   status: number;
   body: TRES | null;
@@ -93,6 +93,7 @@ export default class ApiClient {
       status: response.status,
       body: response.status < 400 ? payload : null,
       errors: response.status >= 400 ? payload.errors : null,
+      data: response.body
     };
   }
 
