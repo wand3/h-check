@@ -1,16 +1,18 @@
 {
   "version": 2,
+  "functions": {
+    "app/main.py": {
+      "runtime": "python3.9"
+    }
+  },
   "routes": [
     {
       "src": "/(.*)",
       "dest": "app/main.py"
     }
   ],
-  "functions": {
-    "app/main.py": {
-
-      "excludeFiles": "{frontend}/**"
-    }
-  }
+  "excludeFiles": [
+    "**/frontend/**"
+  ]
 }
 
