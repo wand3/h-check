@@ -14,5 +14,12 @@
       "src": "/(.*)",
       "dest": "app/main.py"
     }
-  ]
+  ],
+  "functions": {
+    "api/**": {
+
+      "excludeFiles": "{frontend}/**"
+    }
+  }
 }
+
