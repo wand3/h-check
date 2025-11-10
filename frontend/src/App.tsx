@@ -6,14 +6,12 @@ import ApiProvider from './context/ApiProvider';
 import { UserProvider } from './context/UserProvider';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegistePage';
-import useFlash from './hooks/UseFlash';
 
 
 function App() {
-  const flash = useFlash()
   // Define the handler function
   const handleApiError = (error: any) => {
-      flash("An API error occurred:", error);
+      console.log("An API error occurred:", error);
   };
 
   return (
