@@ -5,16 +5,16 @@ import { cn } from '@repo/shadcn-ui/lib/utils';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import type { ComponentProps, HTMLAttributes, ReactNode } from 'react';
 import { createContext, useContext, useState } from 'react';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter/dist/cjs/prism-light';
+// import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter/dist/cjs/prism-light';
+// import PrismLight from 'react-syntax-highlighter/dist/cjs/prism-light';
+
+
 import {
   oneDark,
   oneLight,
 } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-// // 💡 1. Import only the languages your project uses, from the CJS path:
-// import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx';
-// import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash';
-// import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+
 // // You would add more imports here for languages like 'css', 'json', etc.
 
 // // 🛠️ 2. Register them with the highlighter component:
@@ -24,20 +24,24 @@ import {
 
 // 2. Import the actual registration function from the refractor core
 // This requires 'refractor' to be installed (which it is, as a dependency)
-import {refractor} from 'refractor/core'; 
-
+// import {refractor} from 'refractor/core'; 
+// const SyntaxHighlighter = PrismLight;
 // 3. Import languages directly from refractor/lang
 // This requires telling Vite where 'refractor/lang' lives via an alias.
-import tsx from 'refractor/lang/tsx';
-import bash from 'refractor/lang/bash';
-import javascript from 'refractor/lang/javascript';
+// import tsx from 'refractor/lang/tsx';
+// import bash from 'refractor/lang/bash';
+// import javascript from 'refractor/lang/javascript';
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/prism-light';
 
 
 // 🛠️ 4. Register using the refractor core's function (refractor.register)
-refractor.register(tsx);
-refractor.register(bash);
-refractor.register(javascript);
-
+// refractor.register(tsx);
+// refractor.register(bash);
+// refractor.register(javascript);
+SyntaxHighlighter.registerLanguage
+// SyntaxHighlighter.registerLanguage(tsx);
+// PrismLight.registerLanguage(bash);
+// PrismLight.registerLanguage(javascript);
 
 type CodeBlockContextType = {
   code: string;

@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "noEmitOnError": false, 
+    // Recommended for monorepos or projects with complex dependencies
+    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
