@@ -20,11 +20,13 @@ function App() {
         <ApiProvider onError={handleApiError}>
             <UserProvider>
               <Routes>
+                <Route path="/" element={ <Home />} />
                 <Route path="/home" element={ <Home />} />
                 <Route path="/login" element={
                     <LoginPage />
                   } />
-                <Route path="/register" element={<RegisterPage />
+                <Route path="/register" element={
+                  <RegisterPage />
                 } />
               </Routes>
             </UserProvider>

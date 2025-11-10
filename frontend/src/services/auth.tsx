@@ -20,6 +20,8 @@ export const registerUser = createAsyncThunk<RegisterUserOutputSchema, RegisterU
         config
       );
       if (response.status === 201) {
+        // const response = await axios.get(`${Config.baseURL}/token`);
+        // console.log(response.status)
         return response.data
       }
     } catch (error) {

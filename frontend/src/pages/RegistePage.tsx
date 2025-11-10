@@ -1,6 +1,6 @@
 import HBody from "../components/Body";
 import { useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useFlash from "../hooks/UseFlash";
 import Config from "../config";
 import { useDispatch, useSelector } from 'react-redux'
@@ -45,12 +45,12 @@ const RegisterPage = () => {
   useEffect(() => {
     // setFormerrors({})
     if (success) {
-      navigate('/login'); // Replace '/login' with the actual path to your login page
       flash('Registeration successful', 'success')
+      navigate('/login', { replace: true }); // Replace '/login' with the actual path to your login page
 
     }
 
-  }, [success, navigate]);
+  }, [success]);
 
 
   const onSubmit = async (data: RegisterUserInputSchema) => {
@@ -73,10 +73,10 @@ const RegisterPage = () => {
         return;
       }
 
-      dispatch(registerUser({
-        username: data.username, email: data.email, password: data.password,
-        confirm: ""
-      }));
+        dispatch(registerUser({
+          username: data.username, email: data.email, password: data.password,
+          confirm: ""
+        }));
       } catch (err: any) {
         console.error("Registration error:", err);
         flash('Failed', 'error')
@@ -87,6 +87,7 @@ const RegisterPage = () => {
           setError("root", { type: "manual", message: "An unexpected error occurred during registration." });
         }
       }
+
     
   };
 
@@ -94,7 +95,7 @@ const RegisterPage = () => {
     <>
       <HBody nav={false}>
         <section className="bg-muted/30 rounded-md drop-shadow-2xl justify-around my-[5vh] flex">
-          <div className="lg:grid h-[80%] lg:grid-cols-12">
+          <div className="lg:grid h-[80%] lg:grid-cols-12 py-[10%]">
             <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
               <img src="/fhir-bg.jpeg" className="absolute inset-0 h-full w-full object-cover rounded-e-md"/>
             </aside>
@@ -177,6 +178,8 @@ const RegisterPage = () => {
                         <a href="/login" className="text-white underline">Log in</a>.
                       </p>
                     </div>
+
+                    <Link to="/login" replace>Go to Login</Link>
                       
                   </form>
 
