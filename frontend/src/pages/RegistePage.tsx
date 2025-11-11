@@ -1,6 +1,6 @@
 import HBody from "../components/Body";
 import { useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useFlash from "../hooks/UseFlash";
 import Config from "../config";
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,16 +19,6 @@ const RegisterPage = () => {
   const { loading, success } = useSelector((state: RootState) => state.auth); // Type-safe selector
   const dispatch = useDispatch<AppDispatch>(); // Type-safe dispatch 
 
-  // const { register, handleSubmit, formState: { errors }, setError, clearErrors } = useForm<RegisterUserInputSchema>({
-  //   resolver: yupResolver(schema)
-  //   // defaultValues: {
-  //   //   email: '',
-  //   //   username: '',
-  //   //   password: '',
-  //   //   confirm: '',
-  //   // }
-  // });
-
   const {
       register,
       handleSubmit,
@@ -38,15 +28,14 @@ const RegisterPage = () => {
 
 
   const flash = useFlash();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
  
   // Redirect to login page if registration is successful
   useEffect(() => {
-    // setFormerrors({})
     if (success) {
-      flash('Registeration successful', 'success')
-      navigate('/login', { replace: true }); // Replace '/login' with the actual path to your login page
+      window.location.replace('/login');
+      flash('Registeration successful! Login now', 'success')
 
     }
 
@@ -77,6 +66,7 @@ const RegisterPage = () => {
           username: data.username, email: data.email, password: data.password,
           confirm: ""
         }));
+
       } catch (err: any) {
         console.error("Registration error:", err);
         flash('Failed', 'error')

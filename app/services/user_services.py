@@ -15,33 +15,25 @@ from jose import jwt, JWTError
 from app.database.db_engine import get_session
 from ..security import hash_password
 from uuid import UUID
+from ..logger import logger
 
-
-# async def create_user(db: AsyncSession, user_data: UserCreate) -> UserModel:
-#     # The validation logic for existing users should ideally be in the API route
-#     # to provide immediate feedback, but can also be here.
-#
-#     hashed_pass = hash_password(user_data.password)
-#     user = UserModel.from_orm(user_data, {"hashed_password": hashed_pass})
-#
-#     db.add(user)
-#     await db.commit()
-#     await db.refresh(user)
-#     return user
 
 async def create_user(db: AsyncSession, user_data: UserCreate) -> UserInDB:
-    hashed_pass = hash_password(user_data.password)
-    user = UserModel(
-        email=user_data.email,
-        username=user_data.username,
-        hashed_password=hashed_pass,
-        disabled=user_data.disabled or False,
-        profile_pic=user_data.profile_pic,
-    )
-    db.add(user)
-    await db.commit()
-    await db.refresh(user)
-    return user
+    try:
+        hashed_pass = hash_password(user_data.password)
+        user = UserModel(
+            email=user_data.email,
+            username=user_data.username,
+            hashed_password=hashed_pass,
+            disabled=user_data.disabled or False,
+            profile_pic=user_data.profile_pic,
+        )
+        db.add(user)
+        await db.commit()
+        await db.refresh(user)
+        return user
+    except Exception as e:
+        logger.error(e)
 
 async def get_user_by_email(db: AsyncSession, email: str) -> Optional[UserModel]:
     stmt = select(UserModel).where(UserModel.email == email)
