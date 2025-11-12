@@ -1,6 +1,5 @@
 import uuid
 from ..logger import logger
-from bson import ObjectId
 from datetime import datetime, timedelta, timezone
 from passlib.context import CryptContext
 from typing import Optional, Annotated, AsyncGenerator, List, Any
@@ -9,7 +8,7 @@ from fastapi.security import OAuth2PasswordBearer
 from ..schemas.user import UserInDB, UserCreate, UserUpdate, UserBase
 from ..schemas.auth import TokenData
 from ..config import Config
-from jose import jwt, JWTError
+# from jose import jwt, JWTError
 from sqlalchemy.dialects.postgresql import UUID
 from sqlmodel import Field, Session, SQLModel, create_engine, select, Relationship, Column, Text, JSON
 
