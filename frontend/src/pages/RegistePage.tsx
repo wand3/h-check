@@ -1,6 +1,5 @@
 import HBody from "../components/Body";
 import { useEffect } from "react";
-import { Link } from 'react-router-dom';
 import useFlash from "../hooks/UseFlash";
 import Config from "../config";
 import { useDispatch, useSelector } from 'react-redux'
@@ -85,7 +84,7 @@ const RegisterPage = () => {
     <>
       <HBody nav={false}>
         <section className="bg-muted/30 rounded-md drop-shadow-2xl justify-around flex">
-          <div className="lg:grid h-[80%] lg:grid-cols-12 py-[5%]">
+          <div className="lg:grid h-[80%] lg:grid-cols-12 my-auto">
             <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
               <img src="/fhir-bg.jpeg" className="absolute inset-0 h-full w-full object-cover rounded-e-md"/>
             </aside>
@@ -98,12 +97,10 @@ const RegisterPage = () => {
                 <div className="max-w-xl lg:max-w-3xl shadow-lg p-5 px-3 rounded-md">
                   <a className="block text-[#ba2a25]" href="/">
                     <span className="sr-only">Home</span>
-                    {/* <StoreIcon className="h-[4rem] w-fit"/> */}
                   </a>
 
                   <h1 className="mt-6 text-green-600 text-2xl font-bold sm:text-3xl md:text-4xl">
                     Welcome to H-Check<span className="inline-flex absolute mt-1 ml-1">
-                    {/* <ShoppingBag /> */}
                     </span>
                   </h1>
 
