@@ -16,9 +16,8 @@ def create_app() -> FastAPI:
 
     origins = [
         "http://localhost:5173/",
-        "http://127.0.0.1:8000/*",
-        "https://h-check.pages.dev/*",
-        "https://h-check.onrender.com/*",
+        "https://h-check.pages.dev/",
+        "https://h-check.onrender.com/",
         "*"
     ]
     app.add_middleware(
