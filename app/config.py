@@ -16,8 +16,8 @@ class Config:
         SYNC_DATABASE_URL: str = os.getenv("TEST_SYNC_DATABASE_URL",
                                            "postgresql://postgres:ma3str0@localhost:5432/hchecktest")
     else:
-        DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:hcheck_user@dpg-d4akt7ggjchc73eups6g-a:5432/hcheck")
-        SYNC_DATABASE_URL: str = os.getenv("SYNC_DATABASE_URL", "postgresql://postgres:hcheck_user@dpg-d4akt7ggjchc73eups6g-a:5432/hcheck")
+        DATABASE_URL: str = os.getenv("DATABASE_URL")
+        SYNC_DATABASE_URL: str = os.getenv("SYNC_DATABASE_URL")
 
     ACCESS_TOKEN_EXPIRE_MINUTES = 10
     # FHIR Server

@@ -169,7 +169,6 @@ const RegisterPage = () => {
                       </p>
                     </div>
 
-                    <Link to="/login" replace>Go to Login</Link>
                       
                   </form>
 
