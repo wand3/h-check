@@ -84,8 +84,8 @@ const RegisterPage = () => {
   return (
     <>
       <HBody nav={false}>
-        <section className="bg-muted/30 rounded-md drop-shadow-2xl justify-around my-[5vh] flex">
-          <div className="lg:grid h-[80%] lg:grid-cols-12 py-[10%]">
+        <section className="bg-muted/30 rounded-md drop-shadow-2xl justify-around flex">
+          <div className="lg:grid h-[80%] lg:grid-cols-12 py-[5%]">
             <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
               <img src="/fhir-bg.jpeg" className="absolute inset-0 h-full w-full object-cover rounded-e-md"/>
             </aside>

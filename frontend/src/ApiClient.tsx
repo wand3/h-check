@@ -65,7 +65,7 @@ export default class ApiClient {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
+          'Access-Control-Allow-Origin': 'https://h-check.onrender.com/',
           'Authorization': 'Bearer ' + localStorage.getItem('token'),
           ...options.headers,
         },
@@ -118,7 +118,7 @@ export default class ApiClient {
     const response = await this.post<null, Token>('/token', null, {
       headers: {
         Authorization:  'Basic ' + btoa(email + ":" + password),
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/',
+        'Access-Control-Allow-Origin': 'https://h-check.onrender.com/',
       }
 
     });
