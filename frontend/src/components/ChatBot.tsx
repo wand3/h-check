@@ -303,7 +303,7 @@ const FhirBot = () => {
 
 
   return (
-    <div className="flex bg-muted/50 h-full w-full flex-col overflow-hidden rounded-xl border backdrop-blur-2xl shadow-sm">
+    <div className="flex bg-muted/50 h-[97vh] w-full flex-col overflow-hidden rounded-xl border backdrop-blur-2xl shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between border-b bg-muted/50 px-4 py-3">
         <div className="flex items-center gap-3">
