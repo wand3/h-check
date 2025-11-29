@@ -32,7 +32,7 @@ def create_app() -> FastAPI:
 
     origins = [
         "http://localhost:5173",
-        "https://h-check.pages.dev/*"
+        "https://h-check.pages.dev"
     ]
 
     app.add_middleware(
@@ -42,12 +42,12 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"]
     )
-    @app.middleware("http")
+    @app.middleware("https")
     async def add_cors_header(request: Request, call_next):
         response = await call_next(request)
         response.headers["Access-Control-Allow-Origin"] : origins
         response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept, Origin, X-Requested-With"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept, Origin, X-Requested-With, Access-Control-Request-Method, Access-Control-Request-Headers"
         response.headers["Access-Control-Allow-Credentials"] = "true"
 
         return response
