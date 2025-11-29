@@ -61,10 +61,10 @@ const RegisterPage = () => {
         return;
       }
 
-        dispatch(registerUser({
-          username: data.username, email: data.email, password: data.password,
-          confirm: ""
-        }));
+      dispatch(registerUser({
+        username: data.username, email: data.email, password: data.password,
+        confirm: ""
+      }));
 
       } catch (err: any) {
         console.error("Registration error:", err);
