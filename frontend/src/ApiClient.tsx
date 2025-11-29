@@ -122,7 +122,7 @@ export default class ApiClient {
       }
 
     });
-        console.log(`login apiclient ${response}`)
+      console.log(`login apiclient ${response}`)
 
     if (!response.ok || !response.body) {
       return response.status === 401 ? 'fail' : 'error';

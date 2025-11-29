@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from .routes import h_check_router, auth_router, user_router
 import uvicorn
@@ -32,9 +32,9 @@ def create_app() -> FastAPI:
 
     origins = [
         "http://localhost:5173",
-        "http://127.0.0.1:8000/*",
         "https://h-check.pages.dev/*"
     ]
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
@@ -42,6 +42,16 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"]
     )
+    @app.middleware("http")
+    async def add_cors_header(request: Request, call_next):
+        response = await call_next(request)
+        response.headers["Access-Control-Allow-Origin"] : origins
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept, Origin, X-Requested-With"
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+
+        return response
+
     # Include routes
     app.include_router(h_check_router, tags=["FHIR"])
     app.include_router(auth_router)
