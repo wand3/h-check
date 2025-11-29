@@ -32,7 +32,8 @@ def create_app() -> FastAPI:
 
     origins = [
         "http://localhost:5173",
-        "http://127.0.0.1:8000/*"
+        "http://127.0.0.1:8000/*",
+        "https://h-check.pages.dev/*"
     ]
     app.add_middleware(
         CORSMiddleware,
