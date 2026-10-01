@@ -38,9 +38,12 @@ async def process_query(
 
         # Build FHIR query
         fhir_query = processor.build_fhir_query(query_data['query'])
-
+        logger.info(f'natural_language_query=fhir query in')
+        
         # Execute against real FHIR server
         fhir_response = await processor.execute_fhir_query(fhir_query['fhir_url'])
+        
+        logger.info(f'natural_language_query response={fhir_response}')
 
         # Process the response
         processed_results = await processor.process_fhir_response(fhir_response, fhir_query['filters'])
