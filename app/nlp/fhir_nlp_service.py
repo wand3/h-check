@@ -17,7 +17,7 @@ class FHIRQueryProcessor:
         except OSError:
             raise Exception("Please install spaCy model: python -m spacy download en_core_web_sm")
 
-        self.fhir_base_url = "https://hapi.fhir.org/baseR5"
+        self.fhir_base_url = "https://hapi.fhir.org/baseR4"
         self.db = db
 
         self.condition_mappings = {
